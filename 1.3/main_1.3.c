@@ -133,8 +133,8 @@ int main(int argc, char *argv[])
              write_png_file(size_row, size_col,"Life_Start.png", -1, 1);
 
 	}
-	system("rm -r png");
-	system("mkdir png");
+	system("rm -r ./png");
+	system("mkdir ./png");
 	for(int i=0; i<number_png; i++) //Petla na ktorej beda tworzone kolejne iteracje
 	{
 		for(int current_row=0; current_row<size_row; current_row++)
