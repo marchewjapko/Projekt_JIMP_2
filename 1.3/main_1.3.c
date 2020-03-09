@@ -118,8 +118,8 @@ int main(int argc, char *argv[])
 	printf("Poczatkowy stan komorek:\n");
 	print_grid(size_row, size_col, grid);
 
-        system("rm -r png"); //Pozbywam sie poprzednio wygenerowanych plansz
-        system("mkdir png"); //Tworze folder z wygenerowanymi planszami
+        system("rm -r ./png"); //Pozbywam sie poprzednio wygenerowanych plansz
+        system("mkdir ./png"); //Tworze folder z wygenerowanymi planszami
 
 	if (scale > 1) {
 		int upGrid[sc_row][sc_col];
@@ -181,6 +181,10 @@ int main(int argc, char *argv[])
 		{
 			process_file(size_row,size_col,grid,1);
 			write_png_file(size_row, size_col,file_name, i,1);
+			char command[35] = "mv ./";
+                        strcat(command, file_name);
+                        strcat(command, " ./png");
+                        system(command);
 		}
 	}
 	system("mv ./Life_Start.png ./png"); //Przeniesienie pliku do folderu z plikami .png
