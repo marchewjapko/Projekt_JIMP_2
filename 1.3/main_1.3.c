@@ -118,7 +118,7 @@ int main(int argc, char *argv[])
 	printf("Poczatkowy stan komorek:\n");
 	print_grid(size_row, size_col, grid);
 
-        system("rm -r ./png"); //Pozbywam sie poprzednio wygenerowanych plansz
+        system("rm -r ./png"); //Usuwam folder z wczesniej wygenerowanymi planszami
         system("mkdir ./png"); //Tworze folder z wygenerowanymi planszami
 
 	if (scale > 1) {
@@ -133,8 +133,6 @@ int main(int argc, char *argv[])
              write_png_file(size_row, size_col,"Life_Start.png", -1, 1);
 
 	}
-	system("rm -r ./png");
-	system("mkdir ./png");
 	for(int i=0; i<number_png; i++) //Petla na ktorej beda tworzone kolejne iteracje
 	{
 		for(int current_row=0; current_row<size_row; current_row++)
@@ -172,20 +170,16 @@ int main(int argc, char *argv[])
 			upscale(size_row, size_col, grid, sc_row, sc_col, upGrid,scale);	
 			process_file(sc_row,sc_col, upGrid, scale); //pngFile.c
 			write_png_file(sc_row, sc_col, file_name, i, scale);
-			char command[35] = "mv ./";
-			strcat(command, file_name);
-			strcat(command, " ./png");
-			system(command);
 		}
 		else
 		{
 			process_file(size_row,size_col,grid,1);
 			write_png_file(size_row, size_col,file_name, i,1);
-			char command[35] = "mv ./";
-                        strcat(command, file_name);
-                        strcat(command, " ./png");
-                        system(command);
 		}
+                char command[35] = "mv ./"; //Przenoszenie plikow png do folderu png
+                strcat(command, file_name);
+                strcat(command, " ./png");
+                system(command);
 	}
 	system("mv ./Life_Start.png ./png"); //Przeniesienie pliku do folderu z plikami .png
 }
