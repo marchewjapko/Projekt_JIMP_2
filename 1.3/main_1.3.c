@@ -133,6 +133,7 @@ int main(int argc, char *argv[])
              write_png_file(size_row, size_col,"Life_Start.png", -1, 1);
 
 	}
+	system("mv ./Life_Start.png ./png"); //Przeniesienie pliku Life_Start.png do folderu z plikami .png
 	for(int i=0; i<number_png; i++) //Petla na ktorej beda tworzone kolejne iteracje
 	{
 		for(int current_row=0; current_row<size_row; current_row++)
@@ -181,5 +182,4 @@ int main(int argc, char *argv[])
                 strcat(command, " ./png");
                 system(command);
 	}
-	system("mv ./Life_Start.png ./png"); //Przeniesienie pliku do folderu z plikami .png
 }
