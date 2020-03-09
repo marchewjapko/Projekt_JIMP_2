@@ -1,7 +1,9 @@
 
 #include <stdio.h>
 
-void write_png_file(int width, int height, char* file_name, int number);
+void upscale(int width, int height, int cord[width][height], int nwidth, int nheight,int upcord [nwidth][nheight], int scale);
 
-void process_file(int width, int height, int cord[width][height]);
+void write_png_file(int width, int height, char* file_name, int number, int scale);
+
+void process_file(int width, int height, int cord[width][height], int scale);
 
