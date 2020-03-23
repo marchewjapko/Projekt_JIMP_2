@@ -75,7 +75,10 @@ int main(int argc, char *argv[])
 {
 	if(argc<=3)
 	{
-		printf("Podano nieprawidlowwa ilosc argumentow\n");
+		printf("Podano nieprawidlowa ilosc argumentow\n");
+		printf("\nWzór wywołania:\n");
+		printf("./conways_game_of_life.o [plik tekstowy] [ilosc iteracji] [skalowanie]\n");
+		printf("UWAGA -> Przy podaniu zbyt wielkiej skali, program zwróci błąd\n\n");
 		return EXIT_FAILURE;
 	}
 	FILE *in = fopen(argv[1], "r");
@@ -87,9 +90,18 @@ int main(int argc, char *argv[])
 	FILE *out = fopen("skrypt", "w");
 	int size_row = 0; //Ilosc wierszy
 	int size_col = 0; //Ilosc kolumn
+	
+	fileSize(in, &size_row, &size_col); //Czytanie rozmiaru pliku wsadowego
+
+	if(size_col == -1)
+	{
+		printf("Błędny plik. W pliku występuje gdzieś pusta linia.\n");
+		return EXIT_FAILURE;
+	}
+
 	int number_png = atoi(argv[2]); //Ile plikow png program ma tworzyc
 	int scale = atoi(argv[3]); //Skalowanie (reprezentowanie komorki za pomoca kednego piksela jest nie czytelne)
-	fileSize(in, &size_row, &size_col); //Czytanie rozmiaru pliku wsadowego
+//	fileSize(in, &size_row, &size_col); //Czytanie rozmiaru pliku wsadowego
 	int grid[size_row][size_col]; //Tablica reprezentujaca plansze
 	
 	int sc_row = size_row * scale;
@@ -131,6 +143,7 @@ int main(int argc, char *argv[])
              write_png_file(size_row, size_col,"Life_0.png", -1, 1);
 
 	}
+
 	fprintf(out, "%s", "mv ./Life_0.png ./png\n"); //Przeniesienie pliku Life_Start.png do folderu z plikami .png
 	for(int i=0; i<number_png; i++) //Petla na ktorej beda tworzone kolejne iteracje
 	{
